@@ -1,7 +1,7 @@
 {
   "name": "react",
   "version": "1.0.0",
-  "description": "React example starter project",
+  "description": "Array of objects manipulation using context",
   "keywords": [
     "react",
     "starter"
