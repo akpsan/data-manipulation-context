@@ -3,21 +3,22 @@ import { useData } from "./useData";
 import faker from "faker";
 import { Row } from "./Row";
 import { useContext, useEffect, useRef } from "react";
-import { DataContext } from "./RootContextProvider";
+import { DataContext, IDataModel } from "./RootContextProvider";
 
 export default function App() {
   const context = useContext(DataContext);
-  console.log(context);
 
   const newData = () => {
-    context.addItem({
-      id: faker.datatype.uuid(),
-      data: {
-        firstName: faker.name.firstName(),
-        lastName: faker.name.lastName(),
-        avatar: faker.image.avatar()
-      }
-    });
+    if (context) {
+      context.addItem({
+        id: faker.datatype.uuid(),
+        data: {
+          firstName: faker.name.firstName(),
+          lastName: faker.name.lastName(),
+          avatar: faker.image.avatar(),
+        },
+      });
+    }
   };
 
   return (
@@ -31,12 +32,12 @@ export default function App() {
           flexDirection: "row",
           flexWrap: "wrap",
           justifyContent: "space-evenly",
-          overflowX: "scroll"
+          overflowX: "scroll",
         }}
       >
         {context &&
           context.data &&
-          context.data.map((d, i) => {
+          context.data.map((d: IDataModel, i: number) => {
             return <Row rowData={d} key={d.id} />;
           })}
       </div>

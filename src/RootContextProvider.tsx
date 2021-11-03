@@ -1,24 +1,34 @@
-import { createContext, useState } from "react";
+import React, { createContext, useState } from "react";
 
-interface IDataModel {
+export interface IDataModel {
   id: string;
-  data: object;
+  data: any; // change acordingly
 }
 
-export const DataContext = createContext({
-  data: [],
-  setData: null,
-  addItem: null,
-  removeItem: null,
-  editItem: null
-});
+interface IRootContextProvider {
+  data: IDataModel[],
+  setData: Function,
+  addItem: Function,
+  removeItem: Function,
+  editItem: Function,
+}
 
-export function RootContextProvider(props) {
-  const [data, setData] = useState([]);
+const inititalValue = {
+  data: [],
+  setData: () => undefined,
+  addItem: () => undefined,
+  removeItem: () => undefined,
+  editItem: () => undefined
+}
+
+export const DataContext = createContext<IRootContextProvider>(inititalValue);
+
+export const RootContextProvider: React.FC = (props) => {
+  const [data, setData] = useState<IDataModel[]>([]);
   const addItem = (payload: IDataModel, index = data.length) => {
     console.log(payload);
     if (index === data.length) {
-      const newData = [...data];
+      const newData: IDataModel[] = [...data];
       newData.push(payload);
       setData(newData);
     }

@@ -1,33 +1,42 @@
 import { useContext, useState } from "react";
-import { DataContext } from "./RootContextProvider";
-import { useData } from "./useData";
+import { DataContext, IDataModel } from "./RootContextProvider";
+import faker from "faker";
 
-export function Row(props) {
+export const Row: React.FC<{ rowData: IDataModel }> = (props) => {
   const { rowData } = props;
   const [menuToggle, setMenuToggle] = useState(false);
   const context = useContext(DataContext);
+
   const onMouseEnter = () => {
     setMenuToggle(true);
   };
+
   const onMouseLeave = () => {
     setMenuToggle(false);
   };
+
   const deleteCard = () => {
     context.removeItem(rowData.id);
   };
+
   const editCard = () => {
-    // editData();
+    const newData: IDataModel = {
+      id: rowData.id,
+      data: {
+        firstName: faker.name.firstName(),
+        lastName: faker.name.lastName(),
+        avatar: faker.image.avatar(),
+      },
+    };
+    context.editItem(newData);
   };
+
   return (
-    <div style={{ margin: "10px" }}>
+    <div style={{ margin: "10px", position: "relative" }}>
       {menuToggle && (
         <div style={{ margin: "10px", position: "absolute" }}>
-          <span onClick={deleteCard} style={{ margin: "10px" }}>
-            Del
-          </span>
-          <span onClick={editCard} style={{ margin: "10px" }}>
-            Edit
-          </span>
+          <button onClick={deleteCard}>Del</button>
+          <button onClick={editCard}>Edit</button>
         </div>
       )}
       <img
@@ -41,4 +50,4 @@ export function Row(props) {
       </p>
     </div>
   );
-}
+};

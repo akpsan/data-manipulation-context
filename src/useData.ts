@@ -5,7 +5,7 @@ interface IDataModel {
   data: object;
 }
 export function useData(initialValue: Array<IDataModel> = []) {
-  const [data, setData] = useState<IDataModel[] | null>(initialValue);
+  const [data, setData] = useState<IDataModel[]>(initialValue);
 
   const addData = (payload: IDataModel, index = data.length) => {
     console.log(payload);
