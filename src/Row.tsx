@@ -32,7 +32,7 @@ export const Row: React.FC<{ rowData: IDataModel }> = (props) => {
   };
 
   return (
-    <div style={{ margin: "10px", position: "relative" }}>
+    <div style={{ margin: "10px", position: "relative" , padding: "5px", maxHeight: "200px",   boxShadow: "0 0 20px 8px #d0d0d0", width: "140px"}}>
       {menuToggle && (
         <div style={{ margin: "10px", position: "absolute" }}>
           <button onClick={deleteCard}>Del</button>

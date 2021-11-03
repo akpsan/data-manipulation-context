@@ -2,3 +2,23 @@
   font-family: sans-serif;
   text-align: center;
 }
+
+.addNewButton {
+  border: 1px solid green;
+  height: 210px;
+  width: 180px;
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.addNewButton:hover {
+  background-color: aquamarine;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+}
